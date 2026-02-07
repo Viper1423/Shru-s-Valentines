@@ -11,31 +11,30 @@
 body {
   margin: 0;
   font-family: 'Inter', sans-serif;
-  background: radial-gradient(circle at top, #6e1a2b, #2b0a12);
-  color: #4B0F1F;
+  background: radial-gradient(circle at top, #b8576a, #5c1f28);
+  color: #8E3B46;
   overflow: hidden;
 }
 
 .slide {
   display: none;
   height: 100vh;
-  padding: 60px 20px;
+  padding: 40px 20px;
   box-sizing: border-box;
   text-align: center;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  transition: opacity 0.8s ease;
 }
 
 .slide.active {
   display: flex;
-  animation: fadeIn 1s ease;
+  animation: fadeIn 0.8s ease;
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from { opacity: 0; transform: scale(0.98); }
+  to { opacity: 1; transform: scale(1); }
 }
 
 h1, h2 {
@@ -48,12 +47,20 @@ p {
   font-size: 1.1rem;
   max-width: 600px;
   line-height: 1.6;
+  margin-top: 20px;
 }
 
-img {
+.image-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.image-block img {
   max-width: 80%;
-  border-radius: 16px;
-  margin-top: 30px;
+  border-radius: 18px;
+  margin-bottom: 20px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
 }
 
 button {
@@ -89,52 +96,50 @@ button:hover {
 
 <body>
 
-<!-- Music -->
 <audio autoplay loop>
   <source src="music.mp3" type="audio/mpeg">
 </audio>
 
-<!-- Slide 1 -->
 <div class="slide active">
   <h1>Hi.</h1>
-  <p>This page exists because some feelings deserve more than a message.</p>
+  <p>Hey Shruti, My Baiko!! This page exists because some feelings deserve more than a message.</p>
   <button onclick="nextSlide()">Next</button>
 </div>
 
-<!-- Slide 2 -->
 <div class="slide">
   <p>Some people arrive quietly… and somehow change everything.</p>
   <button onclick="nextSlide()">Next</button>
 </div>
 
-<!-- Slide 3 -->
 <div class="slide">
-  <img src="image1.jpeg">
-  <p>In a world that moves fast, you taught me how to slow down.</p>
+  <div class="image-block">
+    <img src="image1.jpeg">
+    <p>In a world that moves fast, you taught me how to slow down.</p>
+  </div>
   <button onclick="nextSlide()">Next</button>
 </div>
 
-<!-- Slide 4 -->
 <div class="slide">
-  <img src="image2.jpeg">
-  <p>Your care feels effortless. Your strength, undeniable.</p>
+  <div class="image-block">
+    <img src="image2.jpeg">
+    <p>Your care feels effortless. Your strength, undeniable.</p>
+  </div>
   <button onclick="nextSlide()">Next</button>
 </div>
 
-<!-- Slide 5 -->
 <div class="slide">
-  <img src="image3.jpeg">
-  <p>You don’t need to be held… you <em>choose</em> to stay.</p>
+  <div class="image-block">
+    <img src="image3.jpeg">
+    <p>You don’t need to be held… you <em>choose</em> to stay.</p>
+  </div>
   <button onclick="nextSlide()">Next</button>
 </div>
 
-<!-- Slide 6 -->
 <div class="slide">
   <p>You show up with kindness. You stand tall in your own world. And somehow, you make space for mine.</p>
   <button onclick="nextSlide()">Next</button>
 </div>
 
-<!-- Slide 7 Question -->
 <div class="slide">
   <p>So here’s my question — not dramatic, just honest.</p>
   <h2>Will you be my Valentine?</h2>
@@ -142,7 +147,6 @@ button:hover {
   <button id="noBtn" onclick="playfulNo()">Nahi 😶</button>
 </div>
 
-<!-- Final Slide -->
 <div class="slide" id="finalSlide">
   <h2>Thank you for choosing me.</h2>
   <p>I don’t take that lightly.</p>
@@ -156,6 +160,11 @@ const slides = document.querySelectorAll(".slide");
 function nextSlide() {
   slides[currentSlide].classList.remove("active");
   currentSlide++;
+
+  if (currentSlide >= slides.length) {
+    currentSlide = slides.length - 1;
+  }
+
   slides[currentSlide].classList.add("active");
 }
 
