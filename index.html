@@ -12,7 +12,7 @@ body {
   margin: 0;
   font-family: 'Inter', sans-serif;
   background: radial-gradient(circle at top, #b8576a, #5c1f28);
-  color: #8E3B46;
+  color: #000;
   overflow: hidden;
 }
 
@@ -157,14 +157,24 @@ button:hover {
 let currentSlide = 0;
 const slides = document.querySelectorAll(".slide");
 
+slides.forEach((slide, index) => {
+  slide.addEventListener("click", function(e) {
+
+    // Prevent double trigger on final slide buttons
+    if (e.target.tagName === "BUTTON") return;
+
+    // If it's the last question slide, don't auto advance
+    if (index === slides.length - 2) return;
+
+    nextSlide();
+  });
+});
+
 function nextSlide() {
+  if (currentSlide >= slides.length - 1) return;
+
   slides[currentSlide].classList.remove("active");
   currentSlide++;
-
-  if (currentSlide >= slides.length) {
-    currentSlide = slides.length - 1;
-  }
-
   slides[currentSlide].classList.add("active");
 }
 
@@ -202,3 +212,4 @@ function createHeart() {
 
 </body>
 </html>
+
